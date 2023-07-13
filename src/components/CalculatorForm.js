@@ -10,6 +10,12 @@ const CalculatorForm = (props) => {
   };
 
   const [userInputs, setUserInputs] = useState({ ...userInputInitialState });
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   // Handlers
   const calculateHandler = (event) => {
@@ -28,12 +34,13 @@ const CalculatorForm = (props) => {
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
       currentSavings += yearlyInterest + yearlyContribution;
+
       yearlyData.push({
         // feel free to change the shape of the data pushed to the array!
         id: Math.random() * (1000 - 1) + 1,
         year: i + 1,
         yearlyInterest: yearlyInterest,
-        savingsEndOfYear: currentSavings,
+        savingsEndOfYear: formatter.format(currentSavings),
         yearlyContribution: yearlyContribution,
       });
     }
