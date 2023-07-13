@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "../styles/Table.module.css";
+import TableItem from "./TableItem";
 
-const Table = () => {
+const Table = (props) => {
   return (
     <table className={styles.result}>
       <thead>
@@ -21,6 +22,9 @@ const Table = () => {
           <td>TOTAL INTEREST GAINED</td>
           <td>TOTAL INVESTED CAPITAL</td>
         </tr>
+        {props.results.map((result) => {
+          return <TableItem key={result.id} data={result} />;
+        })}
       </tbody>
     </table>
   );
